@@ -18,7 +18,7 @@ const ViewComplaints = () => {
     status: '',
     search: '',
   });
-  const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
+  const [viewMode, setViewMode] = useState('list'); 
 
   useEffect(() => {
     fetchComplaints();
@@ -50,7 +50,6 @@ const ViewComplaints = () => {
   };
 
   const handleComplaintClick = (id) => {
-    // Navigate to complaint detail page (to be implemented)
     console.log('Complaint clicked:', id);
   };
 
@@ -93,13 +92,13 @@ const ViewComplaints = () => {
               className={viewMode === 'list' ? 'active' : ''}
               onClick={() => setViewMode('list')}
             >
-              📋 List
+               List
             </button>
             <button
               className={viewMode === 'map' ? 'active' : ''}
               onClick={() => setViewMode('map')}
             >
-              🗺️ Map
+              Map
             </button>
           </div>
         </div>

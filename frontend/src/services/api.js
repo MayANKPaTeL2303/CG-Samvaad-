@@ -62,19 +62,34 @@ export const complaintAPI = {
   getAll: (params) => api.get('/complaints/', { params }),
   getById: (id) => api.get(`/complaints/${id}/`),
   create: (data) => {
+    // Check if data is already FormData
+    if (data instanceof FormData) {
+      // Data is already FormData, send it directly
+      return api.post('/complaints/', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    }
+    
+    // Otherwise, create FormData from object
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       if (data[key] !== null && data[key] !== undefined) {
         let value = data[key];
-        // Convert numbers (lat/lng) to strings for perfect DecimalField parsing
+        // Convert numbers (lat/lng) to strings for DecimalField parsing
         if (typeof value === 'number') {
           value = value.toString();
         }
         formData.append(key, value);
       }
     });
-    // NO HEADERS! Axios auto-sets correct 'multipart/form-data; boundary=----...' 
-    return api.post('/complaints/', formData);
+    
+    return api.post('/complaints/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
   update: (id, data) => api.patch(`/complaints/${id}/`, data),
   delete: (id) => api.delete(`/complaints/${id}/`),

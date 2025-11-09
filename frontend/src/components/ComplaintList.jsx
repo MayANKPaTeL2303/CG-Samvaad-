@@ -74,7 +74,7 @@ const ComplaintList = ({ complaints, onComplaintClick }) => {
           
           <div className="complaint-footer">
             <span className="location-tag">
-              📍 {complaint.latitude.toFixed(4)}, {complaint.longitude.toFixed(4)}
+             Lat,Long:  {Number(complaint.latitude).toFixed(4)}, {Number(complaint.longitude).toFixed(4)}
             </span>
           </div>
         </div>

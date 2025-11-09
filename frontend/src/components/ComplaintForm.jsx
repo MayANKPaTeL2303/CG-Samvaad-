@@ -74,25 +74,31 @@ const ComplaintForm = ({ onSubmit, loading }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+
+const handleSubmit = (e) => {
   e.preventDefault();
   
-  // Create FormData for multipart upload
-  const formDataToSend = new FormData();
-  formDataToSend.append('title', formData.title);
-  formDataToSend.append('description', formData.description);
-  formDataToSend.append('category', formData.category);
-  formDataToSend.append('address', formData.address || ''); // Optional, default empty
-  formDataToSend.append('latitude', position.lat.toString()); // Convert to string for FormData
-  formDataToSend.append('longitude', position.lng.toString()); // Convert to string for FormData
-  
-  // Append image if selected
-  if (formData.image) {
-    formDataToSend.append('image', formData.image);
-  }
-  
-  // Pass FormData to parent onSubmit
-  onSubmit(formDataToSend);
+  // Pass raw data object with position coordinates
+  const dataToSend = {
+    title: formData.title,
+    description: formData.description,
+    category: formData.category,
+    address: formData.address || '',
+    latitude: position.lat,
+    longitude: position.lng,
+    image: formData.image // Pass the file object directly
+  };
+  // In ComplaintForm.jsx handleSubmit
+console.log('Form data being sent:', {
+  title: formData.title,
+  description: formData.description,
+  category: formData.category,
+  latitude: position.lat,
+  longitude: position.lng,
+  image: formData.image
+});
+  // Pass raw data to parent onSubmit (api.js will handle FormData conversion)
+  onSubmit(dataToSend);
 };
 
   return (
