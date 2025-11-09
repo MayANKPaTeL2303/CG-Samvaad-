@@ -25,7 +25,7 @@ It allows users to:
 ## Current Implementation 
 - Citizen/Authorities can register or login in the website
 - Citizen can List down there all issue and can upload photos and location 
-- All issue can be seen by any user and user can also check the current status of that issue. 
+- Citizen can see his issues and current status of that issue, and all the issues are seen by authorities
 - Multilinguality UI, so that every user can understands the language easily
 
 ## Future Implementation
