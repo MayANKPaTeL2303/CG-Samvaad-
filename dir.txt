@@ -1,0 +1,43 @@
+cg-samvaad/
+├── backend/
+│   ├── manage.py
+│   ├── cgsamvaad/
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   ├── complaints/
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── admin.py
+│   └── users/
+│       ├── __init__.py
+│       ├── models.py
+│       ├── serializers.py
+│       ├── views.py
+│       ├── urls.py
+├── frontend/
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── components/
+│   │   │   ├── Navbar.js
+│   │   │   ├── ComplaintForm.js
+│   │   │   ├── ComplaintList.js
+│   │   │   ├── MapView.js
+│   │   ├── pages/
+│   │   │   ├── Home.js
+│   │   │   ├── Login.js
+│   │   │   ├── Register.js
+│   │   │   ├── SubmitComplaint.js
+│   │   │   ├── ViewComplaints.js
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   ├── context/
+│   │   │   ├── LanguageContext.js
+└── README.md
