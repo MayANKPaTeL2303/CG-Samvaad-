@@ -1,6 +1,10 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,7 +71,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cgsamvaad_db',
         'USER': 'postgres',
-        'PASSWORD': '123mayank',
+        'PASSWORD': os.getenv('PSQL_DB_PASSWORD', '123mayank'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
