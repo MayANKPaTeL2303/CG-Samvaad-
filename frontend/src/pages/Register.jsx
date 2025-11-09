@@ -22,7 +22,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const districts = [
-    'Raipur', 'Bilaspur', 'Durg', 'Korba', 'Rajnandgaon', 'Raigarh',
+    'Raipur', 'Bilaspur', 'Durg', 'Bhilai','Korba', 'Rajnandgaon', 'Raigarh',
     'Janjgir-Champa', 'Dhamtari', 'Mahasamund', 'Balod', 'Baloda Bazar',
     'Gariaband', 'Jashpur', 'Surguja', 'Surajpur', 'Balrampur', 'Korea',
     'Kanker', 'Kondagaon', 'Narayanpur', 'Bastar', 'Dantewada', 'Sukma',
