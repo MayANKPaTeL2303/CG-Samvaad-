@@ -28,11 +28,11 @@ It allows users to:
 - All issue can be seen by any user and user can also check the current status of that issue. 
 - Multilinguality UI, so that every user can understands the language easily
 
-## Innovation / Creativity
+## Future Implementation
 
 ### AI Complaint Summarization (Planned)
-In the upcoming version, we plan to use **SBERT (Sentence-BERT)** and **BERTopic** to:
-- Group similar complaints using **semantic similarity**.
+In the upcoming part, we plan to use **SBERT (Sentence-BERT)** and **BERTopic** to:
+- Group similar complaints using **semantic similarity** with the help of clustering and vector embeddings.
 - Generate concise **summaries** of frequently reported issues.
 - Help district officers **prioritize problems** intelligently.
 
