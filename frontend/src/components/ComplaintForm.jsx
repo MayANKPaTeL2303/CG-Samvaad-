@@ -3,11 +3,11 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { useLanguage } from '../context/LanguageContext';
 import 'leaflet/dist/leaflet.css';
 import './ComplaintForm.css';
-
-// Fix for default marker icon in react-leaflet
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -75,16 +75,25 @@ const ComplaintForm = ({ onSubmit, loading }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const complaintData = {
-      ...formData,
-      latitude: position.lat,
-      longitude: position.lng,
-    };
-    
-    onSubmit(complaintData);
-  };
+  e.preventDefault();
+  
+  // Create FormData for multipart upload
+  const formDataToSend = new FormData();
+  formDataToSend.append('title', formData.title);
+  formDataToSend.append('description', formData.description);
+  formDataToSend.append('category', formData.category);
+  formDataToSend.append('address', formData.address || ''); // Optional, default empty
+  formDataToSend.append('latitude', position.lat.toString()); // Convert to string for FormData
+  formDataToSend.append('longitude', position.lng.toString()); // Convert to string for FormData
+  
+  // Append image if selected
+  if (formData.image) {
+    formDataToSend.append('image', formData.image);
+  }
+  
+  // Pass FormData to parent onSubmit
+  onSubmit(formDataToSend);
+};
 
   return (
     <form onSubmit={handleSubmit} className="complaint-form">

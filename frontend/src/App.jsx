@@ -8,12 +8,12 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 import SubmitComplaint from './pages/SubmitComplaint';
 import ViewComplaints from './pages/ViewComplaints';
 
 import './App.css';
 
-// Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem('access_token');
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -29,6 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
             <Route
               path="/submit-complaint"
               element={

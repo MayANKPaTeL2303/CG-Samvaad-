@@ -78,7 +78,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="categories-section">
         <h2 className="section-title">Report Issues About</h2>
         <div className="categories-list">

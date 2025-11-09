@@ -63,14 +63,18 @@ export const complaintAPI = {
   getById: (id) => api.get(`/complaints/${id}/`),
   create: (data) => {
     const formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] !== null && data[key] !== undefined) {
-        formData.append(key, data[key]);
+        let value = data[key];
+        // Convert numbers (lat/lng) to strings for perfect DecimalField parsing
+        if (typeof value === 'number') {
+          value = value.toString();
+        }
+        formData.append(key, value);
       }
     });
-    return api.post('/complaints/', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    // NO HEADERS! Axios auto-sets correct 'multipart/form-data; boundary=----...' 
+    return api.post('/complaints/', formData);
   },
   update: (id, data) => api.patch(`/complaints/${id}/`, data),
   delete: (id) => api.delete(`/complaints/${id}/`),
