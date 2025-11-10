@@ -192,9 +192,6 @@ npm run dev
 ```
 
 Visit `http://localhost:3000` to see the application running.
-
-For detailed setup instructions, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-
 ---
 
 ## Installation
@@ -251,7 +248,7 @@ DB_PORT=5432
 
 #### 5. Update Settings
 
-Edit `cgsamvaad/settings.py`:
+Edit `backend/settings.py`:
 ```python
 # Add before INSTALLED_APPS
 AUTH_USER_MODEL = 'users.User'
