@@ -15,7 +15,7 @@ const Home = () => {
           <p className="hero-subtitle">
             Citizen Grievance & Suggestion Platform for Chhattisgarh
           </p>
-          <p className="hero-description">
+          <p className="hero-description">``
             Report civic issues, track progress, and collaborate for a better Chhattisgarh.
           </p>
 

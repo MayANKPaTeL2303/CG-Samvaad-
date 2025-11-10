@@ -3,7 +3,7 @@ from sentence_transformers import SentenceTransformer
 from bertopic import BERTopic
 from sklearn.cluster import KMeans
 import numpy as np
-from typing import List, Dict, Tuple
+from typing import List, Dict
 import logging
 
 logger = logging.getLogger(__name__)
@@ -69,58 +69,58 @@ class ComplaintClusteringService:
             logger.error(f"Error in KMeans clustering: {e}")
             return {'error': str(e)}
     
-    def cluster_complaints_bertopic(self, complaints_data: List[Dict]) -> Dict:
-        try:
-            texts = [f"{c['title']}. {c['description']}" for c in complaints_data]
+    # def cluster_complaints_bertopic(self, complaints_data: List[Dict]) -> Dict:
+    #     try:
+    #         texts = [f"{c['title']}. {c['description']}" for c in complaints_data]
             
-            if len(texts) < 5:
-                return self.cluster_complaints_kmeans(complaints_data, n_clusters=2)
+    #         if len(texts) < 5:
+    #             return self.cluster_complaints_kmeans(complaints_data, n_clusters=2)
             
-            self.bertopic_model = BERTopic(
-                language='multilingual',
-                calculate_probabilities=True,
-                verbose=False,
-                min_topic_size=2
-            )
+    #         self.bertopic_model = BERTopic(
+    #             language='multilingual',
+    #             calculate_probabilities=True,
+    #             verbose=False,
+    #             min_topic_size=2
+    #         )
             
-            topics, probs = self.bertopic_model.fit_transform(texts)
+    #         topics, probs = self.bertopic_model.fit_transform(texts)
             
-            topic_info = self.bertopic_model.get_topic_info()
+    #         topic_info = self.bertopic_model.get_topic_info()
             
-            clusters = {}
-            for idx, (topic_id, prob) in enumerate(zip(topics, probs)):
-                if topic_id == -1: 
-                    continue
+    #         clusters = {}
+    #         for idx, (topic_id, prob) in enumerate(zip(topics, probs)):
+    #             if topic_id == -1: 
+    #                 continue
                     
-                if topic_id not in clusters:
-                    topic_words = self.bertopic_model.get_topic(topic_id)
-                    keywords = [word for word, _ in topic_words[:5]] if topic_words else []
+    #             if topic_id not in clusters:
+    #                 topic_words = self.bertopic_model.get_topic(topic_id)
+    #                 keywords = [word for word, _ in topic_words[:5]] if topic_words else []
                     
-                    clusters[topic_id] = {
-                        'cluster_id': topic_id,
-                        'complaints': [],
-                        'count': 0,
-                        'keywords': keywords,
-                        'cluster_name': self._generate_cluster_name(keywords)
-                    }
+    #                 clusters[topic_id] = {
+    #                     'cluster_id': topic_id,
+    #                     'complaints': [],
+    #                     'count': 0,
+    #                     'keywords': keywords,
+    #                     'cluster_name': self._generate_cluster_name(keywords)
+    #                 }
                 
-                clusters[topic_id]['complaints'].append({
-                    'id': complaints_data[idx]['id'],
-                    'title': complaints_data[idx]['title'],
-                    'probability': float(prob)
-                })
-                clusters[topic_id]['count'] += 1
+    #             clusters[topic_id]['complaints'].append({
+    #                 'id': complaints_data[idx]['id'],
+    #                 'title': complaints_data[idx]['title'],
+    #                 'probability': float(prob)
+    #             })
+    #             clusters[topic_id]['count'] += 1
             
-            return {
-                'clusters': list(clusters.values()),
-                'total_clusters': len(clusters),
-                'total_complaints': len([t for t in topics if t != -1]),
-                'outliers': sum(1 for t in topics if t == -1)
-            }
+    #         return {
+    #             'clusters': list(clusters.values()),
+    #             'total_clusters': len(clusters),
+    #             'total_complaints': len([t for t in topics if t != -1]),
+    #             'outliers': sum(1 for t in topics if t == -1)
+    #         }
             
-        except Exception as e:
-            logger.error(f"Error in BERTopic clustering: {e}")
-            return self.cluster_complaints_kmeans(complaints_data)
+    #     except Exception as e:
+    #         logger.error(f"Error in BERTopic clustering: {e}")
+    #         return self.cluster_complaints_kmeans(complaints_data)
     
     def _extract_keywords(self, texts: List[str], top_n: int = 5) -> List[str]:
         """Extract top keywords from texts"""

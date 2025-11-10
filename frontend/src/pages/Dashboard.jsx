@@ -193,13 +193,13 @@ const Dashboard = () => {
             >
               {clusteringLoading ? 'Clustering...' : 'Run KMeans Clustering'}
             </button>
-            <button 
+            {/* <button 
               onClick={() => runClustering('bertopic')} 
               disabled={clusteringLoading}
               className="btn-cluster secondary"
             >
               {clusteringLoading ? 'Clustering...' : 'Run BERTopic Clustering'}
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -208,7 +208,7 @@ const Dashboard = () => {
             {clusters.map((cluster) => (
               <div key={cluster.id} className="cluster-card">
                 <div className="cluster-header">
-                  <h4>Cluster {cluster.cluster_id}</h4>
+                  {/* <h4>Cluster {cluster.cluster_id}</h4> */}
                   <span className="cluster-count">{cluster.complaint_count} complaints</span>
                 </div>
                 <h5>{cluster.cluster_name}</h5>
