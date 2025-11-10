@@ -50,7 +50,7 @@ const ViewComplaints = () => {
   };
 
   const handleComplaintClick = (id) => {
-    console.log('Complaint clicked:', id);
+    navigate(`/complaint/${id}`);
   };
 
   const categories = ['water', 'sanitation', 'roads', 'electricity', 'streetlight', 'drainage', 'garbage', 'other'];
@@ -92,7 +92,7 @@ const ViewComplaints = () => {
               className={viewMode === 'list' ? 'active' : ''}
               onClick={() => setViewMode('list')}
             >
-               List
+              List
             </button>
             <button
               className={viewMode === 'map' ? 'active' : ''}

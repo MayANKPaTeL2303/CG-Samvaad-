@@ -11,6 +11,8 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import SubmitComplaint from './pages/SubmitComplaint';
 import ViewComplaints from './pages/ViewComplaints';
+import ComplaintDetail from './pages/ComplaintDetail';
+import Dashboard from './pages/Dashboard';
 
 import './App.css';
 
@@ -43,6 +45,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ViewComplaints />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/complaint/:id"
+              element={
+                <ProtectedRoute>
+                  <ComplaintDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
                 </ProtectedRoute>
               }
             />

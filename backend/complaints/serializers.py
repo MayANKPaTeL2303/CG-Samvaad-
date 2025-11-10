@@ -34,7 +34,7 @@ class ComplaintListSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'title', 'category', 'status',
             'latitude', 'longitude', 'address',
-            'citizen_name', 'created_at'
+            'citizen_name', 'created_at', 'officer_name'
         ]
 
 class ComplaintUpdateSerializer(serializers.ModelSerializer):

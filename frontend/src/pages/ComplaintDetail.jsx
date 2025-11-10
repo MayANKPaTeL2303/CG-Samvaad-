@@ -251,8 +251,8 @@ const ComplaintDetail = () => {
         </div>
 
         <div className="detail-sidebar">
-          <div className="actions-card">
-            <h3>Actions</h3>
+          {/* <div className="actions-card"> */}
+            {/* <h3>Actions</h3> */}
             {userRole === 'officer' && (
               <>
                 {!complaint.assigned_officer && complaint.status === 'pending' && (
@@ -286,12 +286,12 @@ const ComplaintDetail = () => {
               </button>
             )}
 
-            {complaint.status === 'pending' && userRole === 'citizen' && (
+            {/* {complaint.status === 'pending' && userRole === 'citizen' && (
               <button onClick={() => navigate(`/edit-complaint/${id}`)} className="btn-action">
                 Edit Complaint
               </button>
-            )}
-          </div>
+            )} */}
+          {/* </div> */}
 
           <div className="info-card">
             <h4>Need Help?</h4>

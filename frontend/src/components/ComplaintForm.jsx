@@ -3,11 +3,10 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { useLanguage } from '../context/LanguageContext';
 import 'leaflet/dist/leaflet.css';
 import './ComplaintForm.css';
+
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import axios from "axios";
-import { toast } from "react-toastify";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -86,7 +85,7 @@ const handleSubmit = (e) => {
     address: formData.address || '',
     latitude: position.lat,
     longitude: position.lng,
-    image: formData.image // Pass the file object directly
+    image: formData.image 
   };
   // In ComplaintForm.jsx handleSubmit
 console.log('Form data being sent:', {
@@ -97,7 +96,6 @@ console.log('Form data being sent:', {
   longitude: position.lng,
   image: formData.image
 });
-  // Pass raw data to parent onSubmit (api.js will handle FormData conversion)
   onSubmit(dataToSend);
 };
 

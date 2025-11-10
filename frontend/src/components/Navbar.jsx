@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Links, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './Navbar.css';
 
@@ -7,6 +7,7 @@ const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const isAuthenticated = !!localStorage.getItem('access_token');
+  const userRole = localStorage.getItem('user_role') || 'citizen'
 
   const handleLogout = () => {
     localStorage.clear();
@@ -31,6 +32,11 @@ const Navbar = () => {
               <Link to="/view-complaints" className="navbar-link">
                 {t('viewComplaints')}
               </Link>
+              {userRole === 'officer' && (
+                <Link to="/dashboard" className="navbar-link">
+                  Dashboard
+                </Link>
+              )}
               <Link to="/profile" className="navbar-link">
                 {t('profile')}
               </Link>

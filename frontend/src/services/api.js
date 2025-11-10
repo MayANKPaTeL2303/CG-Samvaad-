@@ -59,36 +59,59 @@ export const authAPI = {
 
 // Complaint APIs
 export const complaintAPI = {
-  getAll: (params) => api.get('/complaints/', { params }),
-  getById: (id) => api.get(`/complaints/${id}/`),
+  getAll: (params) => api.get('/complaints/v2/', { params }),
+  getById: (id) => api.get(`/complaints/v2/${id}/`),
   create: (data) => {
-    if (data instanceof FormData) {
-      return api.post('/complaints/', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-    }
-    
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (data[key] !== null && data[key] !== undefined) {
-        let value = data[key];
-        if (typeof value === 'number') {
-          value = value.toString();
-        }
-        formData.append(key, value);
-      }
-    });
+  
+    // Handle each field properly
+    if (data.title) formData.append('title', data.title);
+    if (data.description) formData.append('description', data.description);
+    if (data.category) formData.append('category', data.category);
     
-    return api.post('/complaints/', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  },
-  update: (id, data) => api.patch(`/complaints/${id}/`, data),
-  delete: (id) => api.delete(`/complaints/${id}/`),
+    // Handle coordinates - convert to proper decimal strings
+    if (data.latitude !== undefined && data.latitude !== null) {
+      formData.append('latitude', parseFloat(data.latitude).toFixed(6));
+    }
+    if (data.longitude !== undefined && data.longitude !== null) {
+      formData.append('longitude', parseFloat(data.longitude).toFixed(6));
+    }
+  
+    // Handle optional fields
+    if (data.address) formData.append('address', data.address);
+    if (data.district) formData.append('district', data.district);
+    if (data.priority) formData.append('priority', data.priority);
+  
+    // Handle image - only append if it exists and is a File object
+    if (data.image && data.image instanceof File) {
+      formData.append('image', data.image);
+    }
+  
+    // Debug logging
+    console.log('FormData contents:');
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+  
+    return api.post('/complaints/v2/', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+},
+  update: (id, data) => api.patch(`/complaints/v2/${id}/`, data),
+  delete: (id) => api.delete(`/complaints/v2/${id}/`),
+  rateComplaint: (id, data) => api.post(`/complaints/v2/${id}/rate_complaint/`, data),
+  getUpdates: (id) => api.get(`/complaints/v2/${id}/updates/`),
+  assignToMe: (id) => api.post(`/complaints/v2/${id}/assign_to_me/`),
+};
+
+// Analytics APIs
+export const analyticsAPI = {
+  getDashboardStats: () => api.get('/analytics/dashboard_stats/'),
+  clusterComplaints: (data) => api.post('/analytics/cluster_complaints/', data),
+  getClusters: () => api.get('/analytics/get_clusters/'),
+  getHeatmapData: (params) => api.get('/analytics/heatmap_data/', { params }),
 };
 
 export default api;

@@ -7,7 +7,7 @@ from django.utils import timezone
 from .models import Complaint, ComplaintUpdate
 from .serializers import ComplaintSerializer, ComplaintListSerializer, ComplaintUpdateSerializer, ComplaintRatingSerializer
 
-class ComplaintListCreateView(generics.ListCreateAPIView):
+class ComplaintViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category', 'status', 'priority', 'district']
