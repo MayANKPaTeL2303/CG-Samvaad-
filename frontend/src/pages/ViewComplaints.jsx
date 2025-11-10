@@ -54,7 +54,7 @@ const ViewComplaints = () => {
   };
 
   const categories = ['water', 'sanitation', 'roads', 'electricity', 'streetlight', 'drainage', 'garbage', 'other'];
-  const statuses = ['pending', 'in_progress', 'resolved', 'rejected'];
+  const statuses = ['Pending', 'In_progress', 'Resolved', 'Rejected'];
 
   return (
     <div className="view-complaints-page">

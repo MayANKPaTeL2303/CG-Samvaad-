@@ -16,9 +16,11 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chhattisgarh_districts_map.svg/50px-Chhattisgarh_districts_map.svg.png" alt=""/>
+        <Link to="/" className="navbar-logo" >
           {t('appName')}
         </Link>
+
 
         <div className="navbar-menu">
           <Link to="/" className="navbar-link">{t('home')}</Link>
@@ -34,7 +36,6 @@ const Navbar = () => {
               <Link to="/view-complaints" className="navbar-link">
                 {t('viewComplaints')}
               </Link>
-              {/* {{console.log(userRole);}} */}
               {userRole === 'officer' && (
                 <Link to="/dashboard" className="navbar-link">
                   Dashboard
