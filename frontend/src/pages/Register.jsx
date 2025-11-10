@@ -50,6 +50,8 @@ const Register = () => {
       const response = await authAPI.register(formData);
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
+      localStorage.setItem('user_role', response.data.user.role);
+      localStorage.setItem('user_id', response.data.user.id);
       
       toast.success('Registration successful!');
       navigate('/');

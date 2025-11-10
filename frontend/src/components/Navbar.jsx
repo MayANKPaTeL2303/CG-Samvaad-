@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link, Links, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './Navbar.css';
 
@@ -26,12 +25,16 @@ const Navbar = () => {
           
           {isAuthenticated && (
             <>
+            {userRole === 'citizen' &&
               <Link to="/submit-complaint" className="navbar-link">
                 {t('submitComplaint')}
               </Link>
+            }
+              
               <Link to="/view-complaints" className="navbar-link">
                 {t('viewComplaints')}
               </Link>
+              {/* {{console.log(userRole);}} */}
               {userRole === 'officer' && (
                 <Link to="/dashboard" className="navbar-link">
                   Dashboard

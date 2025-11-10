@@ -29,6 +29,10 @@ const Login = () => {
       const response = await authAPI.login(formData);
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
+
+      const profileResponse = await authAPI.getProfile();
+      localStorage.setItem('user_role', profileResponse.data.role);
+      localStorage.setItem('user_id', profileResponse.data.id);
       
       toast.success('Login successful!');
       navigate('/');
